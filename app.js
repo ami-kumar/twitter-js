@@ -10,7 +10,7 @@ app.get( '/', function( req, res ) {
 	res.send( 'hello, world!' )
 } )
 app.get( '/news', function( req, res ) {
-	res.send( 'The weather is 20 degrees' )
+	res.send( 'Today is Lincoln\'s birthday' )
 } ) // routing example
 
 var server = app.listen( 3000, function() {
