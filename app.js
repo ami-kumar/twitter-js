@@ -6,9 +6,12 @@ var app = express()
 // set up Morgan to log app activity
 // use 'dev' not 'combined' format
 app.use( morgan( 'dev' ) )
-app.get('/', function( req, res ) {
+app.get( '/', function( req, res ) {
 	res.send( 'hello, world!' )
 } )
+app.get( '/news', function( req, res ) {
+	res.send( 'The weather is 20 degrees' )
+} ) // routing example
 
 var server = app.listen( 3000, function() {
 	var host = server.address().address
