@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var __ = require('underscore');
 
 data = []
 
@@ -17,7 +17,7 @@ var find = function(properties) {
 	return __.where(data, properties);
 }
 
-module.exports = {add : add, list : list, find : find};
+module.exports = { add: add, list: list, find: find };
 
 var randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -39,4 +39,6 @@ for(var i=0; i<10; i++) {
 }
 
 
-console.log(data);
+
+
+//console.log(data);
