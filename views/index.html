@@ -14,10 +14,11 @@
     {% if showForm %}
       <form action="/submit" method="POST">
         <label for="name_field">Name:</label>
-        <input name="name" type="text" id="name_field" />
+        <input name="name" type="text" id="name_field" value="{{user}}" />
+
 
         <label for="text_field">Text:</label>
-        <input name="text" type="text" id="text_field" style="width: 350px;" />
+        <input name="text" type="text" id="text_field" style="width: 350px;" value="{{text}}"/>
 
         <input type="submit" value="Submit" />
       </form>
@@ -25,9 +26,7 @@
 
     <div class="col-md-9">
       <h3> All Tweets </h3>
-      <!-- display tweets here -->
       {% for tweet in tweets %}
-        <!-- <li>{{tweet.text}}</li> -->
         <div class="tweetbox"> 
           <img>
           <div class = "content"> 
