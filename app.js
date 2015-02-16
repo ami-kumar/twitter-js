@@ -4,12 +4,17 @@ var morgan = require('morgan')
 var app = express()
 var swig = require('swig')
 var routes = require('./routes/');
+var bodyParser = require( 'body-parser' )
 
 
 app.use( morgan( 'dev' ) )
-app.use('/', routes);
+app.use( bodyParser.urlencoded( { extended: false } ) )
+
+app.use('/', routes)
+app.use( bodyParser.json() )
 
 app.use(express.static(__dirname + '/public'));
+
 
 app.engine('html', swig.renderFile)
 app.set('view engine', "html")

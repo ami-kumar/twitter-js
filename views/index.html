@@ -19,13 +19,26 @@
         <div class="tweetbox"> 
           <img>
           <div class = "content"> 
-            <div class = "by"> <a href = "users/{{tweet.name}}"> {{tweet.name}} </a> </div> 
+            <div class = "by"> <a href = "/users/{{tweet.name}}"> {{tweet.name}} </a> </div> 
             {{tweet.text}} <br>
             <a href = "http://www.google.com"> Re-tweet </a>
 
           </div>
         </div>
       {% endfor %}
+
+      {% if showForm %}
+        <form action="/submit" method="POST">
+          <label for="name_field">Name:</label>
+          <!-- <input name="name" type="text" id="name_field" /> -->
+          <input name = "name" value = "{{name}}" />
+
+          <label for="text_field">Text:</label>
+          <input name="text" type="text" id="text_field" style="width: 350px;" />
+
+          <input type="submit" value="Submit" />
+        </form>
+      {% endif %}
       
     </div>
   </div>
