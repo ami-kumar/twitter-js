@@ -3,7 +3,7 @@ id = 0
 data = []
 
 var add = function(name, text) {
-  data.unshift({ name : name, text: text, id: id.toString() });
+  data.push({ name : name, text: text, id: id.toString() });
   id = id + 1
 }
 

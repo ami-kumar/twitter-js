@@ -4,31 +4,32 @@ var tweetBank = require( '../tweetBank' )
 
 router.get( '/', function( req, res ) {
 	var tweets = tweetBank.list()
-	res.render( 'index', { title: 'Twitter.js', tweets: tweets } );
+	res.render( 'index', { title: 'Twitter.js', tweets: tweets, showForm: true } )
 })
 
-router.get('/users/:name', function(req, res) {
-  var name = req.params.name;
-  var list = tweetBank.find( {name: name} );
-  console.log(list);
-  res.render( 'index', { title: 'Twitter.js - Posts by '+name , tweets: list, showForm: true, user: name} );
-});
+router.get( '/users/:name', function( req, res ) {
+	var name = req.params.name
+	var tweets = tweetBank.find( {name: name} )
+	res.render( 'index', { title: 'Twitter.js - Posts by ' + name, tweets: tweets, showForm: true, name: name } )
+} )
 
-router.get('/users/:name/tweets/:id', function(req, res) {
-  var id = req.params.id;
-  var name = req.params.name;
-  var list = tweetBank.find( {id: id} );
-  res.render( 'index', { title: 'Twitter.js - Posts by '+ name , tweets: list, showForm: true, user: name } );
-});
+router.get( '/users/:name/tweets/:id', function( req, res ) {
+	var name = req.params.name
+	var id = req.params.id
+	var tweets = tweetBank.find( {name: name, id: id} )
+	res.render( 'index', { title: 'Twitter.js - Post by ' + name, tweets: tweets } )
+} )
 
-router.post('/submit', function(req, res) {
-  JSON.stringify(req.body, null, 2);
-  var name = req.body.name;
-  var text = req.body.text;
-  tweetBank.add(name, text);
-  res.redirect('/');
-});
+router.post( '/submit', function( req, res ) {
+	var name = req.body.name
+	var text = req.body.text
+	tweetBank.add( name, text )
+	res.redirect( '/' )
+	io.sockets.emit('new_tweet', { name: name, text: text });
+})
 
+module.exports = function( io ) {
+	//route definitions, etc.
 
-
-module.exports = router
+	return router
+}
