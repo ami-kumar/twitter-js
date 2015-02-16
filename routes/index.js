@@ -25,6 +25,11 @@ router.post( '/submit', function( req, res ) {
 	var text = req.body.text
 	tweetBank.add( name, text )
 	res.redirect( '/' )
+	io.sockets.emit('new_tweet', { name: name, text: text });
 })
 
-module.exports = router
+module.exports = function( io ) {
+	//route definitions, etc.
+
+	return router
+}
