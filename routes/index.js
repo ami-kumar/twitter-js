@@ -1,6 +1,7 @@
 var express = require( 'express')
 var router = express.Router()
 var tweetBank = require( '../tweetBank' )
+var io = require('socket.io');
 
 router.get( '/', function( req, res ) {
 	var tweets = tweetBank.list()
@@ -20,16 +21,15 @@ router.get( '/users/:name/tweets/:id', function( req, res ) {
 	res.render( 'index', { title: 'Twitter.js - Post by ' + name, tweets: tweets } )
 } )
 
-router.post( '/submit', function( req, res ) {
-	var name = req.body.name
-	var text = req.body.text
-	tweetBank.add( name, text )
-	res.redirect( '/' )
-	io.sockets.emit('new_tweet', { name: name, text: text });
-})
 
-module.exports = function( io ) {
-	//route definitions, etc.
+router.post('/submit', function(req, res) {
+  var name = req.body.name;
+  var text = req.body.text;
+  router.io.sockets.emit('new_tweet', tweetBank.add(name, text));
+  res.redirect('/')
+});
 
-	return router
-}
+module.exports = function (io) {
+  router.io = io;
+  return router;
+};

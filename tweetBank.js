@@ -3,8 +3,10 @@ id = 0
 data = []
 
 var add = function(name, text) {
-  data.push({ name : name, text: text, id: id.toString() });
-  id = id + 1
+  var tweet = { name : name, text: text, id: id.toString()};
+  data.push(tweet);
+  id = id + 1;
+  return tweet;
 }
 
 
